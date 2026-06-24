@@ -2,8 +2,6 @@
 
 AI가 냉장고 속 재료로 맛있는 레시피를 만들어주는 요리 도우미 앱입니다.
 
-[![Open in Bolt](https://bolt.new/static/open-in-bolt.svg)](https://bolt.new/~/sb1-9rnlknu8)
-
 ## 주요 기능
 
 ### 1. AI 레시피 생성
@@ -20,7 +18,7 @@ AI가 냉장고 속 재료로 맛있는 레시피를 만들어주는 요리 도�
 - 각 레시피의 칼로리와 탄단지 비중을 자동 계산합니다.
 - 아름다운 그래디언트 바 차트로 시각화합니다.
 
-### 4. AI 사진 스캔
+### 4. 멀티모달 사진 스캔
 - 냉장고 내부 사진이나 마트 영수증을 업로드하면 자동으로 식재료를 추출합니다.
 - 드래그 앤 드롭 또는 클릭으로 간편하게 업로드합니다.
 - 추출된 재료는 자동으로 입력창에 채워집니다.
@@ -31,11 +29,13 @@ AI가 냉장고 속 재료로 맛있는 레시피를 만들어주는 요리 도�
 
 ## 기술 스택
 
-- **Frontend**: React 18 + TypeScript + Vite
-- **Styling**: Tailwind CSS
-- **Icons**: Lucide React
-- **AI**: GitHub Models API (GPT-4o Vision)
-- **Image Export**: html2canvas
+- **React 18** - 사용자 인터페이스
+- **TypeScript** - 타입 안정성
+- **Tailwind CSS** - 스타일링
+- **Vite** - 빠른 개발 서버
+- **GitHub Models - GPT-4o** - 멀티모달 이미지 인식 및 레시피 생성 API
+- **html2canvas** - 이미지 저장 기능
+- **Lucide React** - 아이콘
 
 ## 시작하기
 
@@ -68,6 +68,7 @@ GitHub Personal Access Token 발급 방법:
 ```bash
 npm run dev
 ```
+서버가 구동되면 브라우저에서 http://localhost:5173 주소로 접속하여 앱을 사용할 수 있습니다.
 
 ### 빌드
 
@@ -88,16 +89,12 @@ npm run build
 
 ```
 src/
-├── App.tsx                 # 메인 앱 컴포넌트
+├── App.tsx                 # 메인 앱 컴포넌트
 ├── components/
-│   ├── ImageScanner.tsx    # 사진 스캔 컴포넌트
-│   ├── LoadingAnimation.tsx # 로딩 애니메이션
-│   ├── RecipeForm.tsx      # 입력 폼 컴포넌트
-│   └── RecipeReceipt.tsx   # 레시피 영수증 컴포넌트
+│   ├── ImageScanner.tsx    # 사진 스캔 컴포넌트
+│   ├── LoadingAnimation.tsx # 로딩 애니메이션
+│   ├── RecipeForm.tsx      # 입력 폼 컴포넌트
+│   └── RecipeReceipt.tsx   # 레시피 영수증 컴포넌트
 └── utils/
-    └── openaiClient.ts     # API 클라이언트
+    └── openaiClient.ts     # API 클라이언트
 ```
-
-## 라이선스
-
-MIT
