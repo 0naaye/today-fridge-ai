@@ -20,7 +20,7 @@ Bolt를 활용한 바이브 코딩(Vibe Coding) 방식으로 제작했으며, �
 ### 메인 화면 및 조건 설정
 
 <p align="center">
-  <img src="screenshots/recipe-1.jpg" width="45%" />
+  <img src="screenshots/recipe1.jpg" width="45%" />
   <img src="screenshots/recipe2.jpg" width="45%" />
 </p>
 
