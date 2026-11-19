@@ -1,56 +1,80 @@
 # 오늘의 냉파 (Today's Fridge AI)
 
-AI가 냉장고 속 재료로 맛있는 레시피를 만들어주는 요리 도우미 앱입니다.
+냉장고에 남아 있는 식재료와 사용자의 요리 조건을 바탕으로 맞춤형 레시피를 생성하는 AI 요리 도우미 웹앱입니다.
 
 ## 개발 배경 및 방식
 
 본 프로젝트는 냉장고에 남아 있는 식재료를 효율적으로 활용할 수 있도록 AI 기반 레시피 추천 서비스를 기획하고 구현한 개인 프로젝트입니다.
 
-바이브 코딩(Vibe Coding) 방식을 활용하여 제작하였으며, 생성형 AI를 기반으로 아이디어를 실제 웹 애플리케이션으로 구현하는 과정을 경험하는 데 목적을 두었습니다.
+Bolt를 활용한 바이브 코딩(Vibe Coding) 방식으로 제작했으며, 생성형 AI를 활용해 서비스 아이디어를 작동하는 웹 애플리케이션으로 구현하는 데 목적을 두었습니다.
 
 ## 주요 기능
 
-### 1. AI 레시피 생성
-- 보유한 재료를 입력하면 AI가 맞춤 레시피를 생성합니다.
-- 요리 숙련도(초보/중수/고수) 선택으로 난이도 조절이 가능합니다.
+- **식재료 인식**: 냉장고 사진이나 마트 영수증에서 AI로 식재료를 추출하고 입력창에 자동으로 반영합니다. 직접 입력도 가능합니다.
+- **AI 맞춤 레시피 생성**: 보유 식재료, 요리 숙련도(초보/중수/고수), 선택 조건(비건, 매운맛 금지, 자취생용)을 반영한 레시피를 생성합니다.
+- **영양 정보 시각화**: AI가 추정한 칼로리와 탄수화물·단백질·지방 함량 및 중량 비율을 차트로 표시합니다.
+- **레시피 영수증**: 요리 이름, 소요 시간, 준비물, 조리 과정, 영양 정보를 영수증 형태로 제공하며 이미지 저장 및 인쇄를 지원합니다.
 
-### 2. 조건 필터
-다양한 조건에 맞춰 레시피를 생성합니다:
-- **비건**: 모든 동물성 재료 제외
-- **매운맛 금지**: 고추, 고추장 등 매운 재료 제외
-- **자취생용**: 전자레인지로 조리 가능한 레시피
+## 실행 화면
 
-### 3. 영양 분석
-- 각 레시피의 칼로리와 탄단지 비중을 자동 계산합니다.
-- 그래디언트 바 차트로 시각화합니다.
+### 메인 화면 및 조건 설정
 
-### 4. 멀티모달 사진 스캔
-- 냉장고 내부 사진이나 마트 영수증을 업로드하면 자동으로 식재료를 추출합니다.
-- 드래그 앤 드롭 또는 클릭으로 간편하게 업로드합니다.
-- 추출된 재료는 자동으로 입력창에 채워집니다.
+<p align="center">
+  <img src="screenshots/recipe-1.jpg" width="45%" />
+  <img src="screenshots/recipe-2.jpg" width="45%" />
+</p>
 
-### 5. 레시피 영수증
-- 영수증 스타일로 레시피를 출력합니다.
-- 이미지로 저장하거나 인쇄할 수 있습니다.
+식재료를 직접 입력하거나 사진을 통해 추출하고,
+식단 조건 및 요리 숙련도를 설정할 수 있습니다.
+
+### AI 레시피 생성 결과
+
+<p align="center">
+  <img src="screenshots/recipe-receipt.png" width="40%" />
+</p>
+
+AI가 생성한 레시피를 영수증 형태로 제공하며,
+준비물, 조리 과정, 영양 정보(추정치)를 확인할 수 있습니다.
+생성된 레시피는 이미지로 저장하거나 인쇄할 수 있습니다.
 
 ## 기술 스택
 
-- **React 18** - 사용자 인터페이스
-- **TypeScript** - 타입 안정성
-- **Tailwind CSS** - 스타일링
-- **Vite** - 빠른 개발 서버
-- **GitHub Models - GPT-4o** - 멀티모달 이미지 인식 및 레시피 생성 API
-- **html2canvas** - 이미지 저장 기능
-- **Lucide React** - 아이콘
+- **Frontend**: React 18, TypeScript, Tailwind CSS
+- **Build Tool**: Vite
+- **AI**: GitHub Models API (GPT-4o, 이미지 인식 및 레시피 생성)
+- **Libraries**: html2canvas (이미지 저장), Lucide React (아이콘)
+- **Development Tool**: Bolt (바이브 코딩)
 
-## 시작하기
+## 프로젝트 구조
+
+주요 소스 코드 및 실행 예시 파일을 기준으로 정리했습니다.
+
+```text
+src/
+├── components/
+│   ├── ImageScanner.tsx      # 사진 인식 및 식재료 추출
+│   ├── LoadingAnimation.tsx # 로딩 화면
+│   ├── RecipeForm.tsx        # 재료 입력 및 조건 설정
+│   └── RecipeReceipt.tsx     # 레시피 결과 화면
+├── utils/
+│   └── openaiClient.ts       # AI API 호출
+├── App.tsx                   # 메인 앱
+├── index.css                 # 스타일
+├── main.tsx                  # 앱 진입점
+└── vite-env.d.ts             # Vite 타입 선언
+
+screenshots/
+└── recipe-receipt.png        # 레시피 생성 결과 예시
+```
+
+## 설치 및 실행
 
 ### 환경 요구사항
 
-- Node.js 18+
-- GitHub Personal Access Token (GitHub Models API용)
+- Node.js 18 이상 (기존 Vite 5 환경 기준)
+- GitHub Models API 사용 권한이 포함된 Personal Access Token
 
-### 설치
+### 패키지 설치
 
 ```bash
 npm install
@@ -58,23 +82,19 @@ npm install
 
 ### 환경 변수 설정
 
-`.env` 파일을 생성하고 다음 내용을 추가합니다:
+프로젝트 최상위 경로에 `.env` 파일을 생성하고 GitHub Personal Access Token을 입력합니다. `.env.example` 파일을 참고할 수 있습니다.
 
-```
+```ini
 VITE_GITHUB_TOKEN=your_github_personal_access_token
 ```
-
-GitHub Personal Access Token 발급 방법:
-1. GitHub 설정 → Developer settings → Personal access tokens
-2. `models:read` 권한으로 토큰 생성
-3. 생성된 토큰을 `.env` 파일에 입력
 
 ### 실행
 
 ```bash
 npm run dev
 ```
-서버가 구동되면 브라우저에서 http://localhost:5173 주소로 접속하여 앱을 사용할 수 있습니다.
+
+브라우저에서 터미널에 안내된 로컬 주소(기본값 `http://localhost:5173`)로 접속합니다.
 
 ### 빌드
 
@@ -82,25 +102,7 @@ npm run dev
 npm run build
 ```
 
-## 사용법
+## 유의사항
 
-1. **재료 입력**: 직접 입력하거나 사진을 업로드하여 재료를 추출합니다.
-2. **조건 선택**: 비건, 매운맛 금지, 자취생용 등 조건을 선택합니다.
-3. **숙련도 선택**: 초보/중수/고수 중 선택합니다.
-4. **레시피 생성**: '레시피 생성' 버튼을 클릭합니다.
-5. **결과 확인**: 영수증 형태의 레시피와 영양 정보를 확인합니다.
-6. **저장/인쇄**: 이미지로 저장하거나 인쇄합니다.
-
-## 프로젝트 구조
-
-```
-src/
-├── App.tsx                 # 메인 앱 컴포넌트
-├── components/
-│   ├── ImageScanner.tsx    # 사진 스캔 컴포넌트
-│   ├── LoadingAnimation.tsx # 로딩 애니메이션
-│   ├── RecipeForm.tsx      # 입력 폼 컴포넌트
-│   └── RecipeReceipt.tsx   # 레시피 영수증 컴포넌트
-└── utils/
-    └── openaiClient.ts     # API 클라이언트
-```
+- 생성된 레시피와 영양 정보는 AI가 제공하는 참고용 정보이며, 실제 식재료와 조리 방법에 따라 달라질 수 있습니다.
+- 개인 로컬 실행용 프로토타입입니다. 현재 API 토큰이 클라이언트에 노출될 수 있으므로 실제 토큰이 포함된 파일이나 빌드 결과물을 공개하지 않아야 합니다. 공개 배포 시에는 서버에서 API 토큰을 관리하는 구조가 필요합니다.
